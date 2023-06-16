@@ -1,9 +1,12 @@
 from flask import Flask, request, send_from_directory
+from flask_sslify import SSLify
 import os
 
 DEBUG = 1
 
 app = Flask(__name__)
+sslify = SSLify(app)
+
 
 # ユーザ名を取得
 user = os.getlogin()
@@ -29,6 +32,10 @@ def save_float_array():
     # float_arrayの保存処理を実装する
     return "Float array saved successfully"
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080)
+if __name__ == '__main__':
+    context = ('/etc/letsencrypt/live/mobile-federated-learning.com/fullchain.pem', '/etc/letsencrypt/live/mobile-federated-learning.com/privkey.pem')
+    app.run(host='0.0.0.0', port=443, ssl_context=context)
+
+#if __name__ == "__main__":
+    #app.run(host="0.0.0.0", port=8080)
 
