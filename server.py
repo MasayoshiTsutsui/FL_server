@@ -11,20 +11,13 @@ app = flask.Flask(__name__)
 sslify = SSLify(app)
 
 
-# ユーザ名を取得
-user = os.getlogin()
-
-
-# hoge.txtのdirectory
-static_directory = f"/home/{user}/fl_server/static"
-
 # クライアントからの要求があった場合のエンドポイント
 @app.route("/load-model", methods=["GET"])
 def get_latest_mlmodel():
     if DEBUG:
         print("get_mlmodel_file was called")
     gModel_idx = len(os.listdir(GLOBAL_MODEL_DIR))
-    return flask.send_from_directory(static_directory, f"Hands2num_v{gModel_idx}.mlmodel")
+    return flask.send_from_directory(GLOBAL_MODEL_DIR, f"Hands2num_v{gModel_idx}.mlmodel")
 
 # クライアントからの要求があった場合のエンドポイント
 @app.route("/submit-params", methods=["POST"])
