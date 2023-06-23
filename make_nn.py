@@ -33,7 +33,7 @@ spec.neuralNetworkClassifier.stringClassLabels.vector.extend(labels)
 builder = NeuralNetworkBuilder(spec=model._spec)
 
 builder.make_updatable(["fullyconnected0"])
-builder.set_categorical_cross_entropy_loss(name="lossLayer", input="labelProbability")
+#builder.set_categorical_cross_entropy_loss(name="lossLayer", input="labelProbability")
 builder.set_epochs(10, [1, 10, 50])
 
 # Using the SDG optimizer:
