@@ -1,5 +1,6 @@
 import flask
 from flask_sslify import SSLify
+from waitress import serve
 from model_manager import save_as_file, try_to_update_model
 from constants import GLOBAL_MODEL_DIR
 
@@ -33,4 +34,5 @@ def save_float_params():
 
 if __name__ == '__main__':
     context = ('/etc/letsencrypt/live/mobile-federated-learning.com/fullchain.pem', '/etc/letsencrypt/live/mobile-federated-learning.com/privkey.pem')
-    app.run(host='0.0.0.0', port=443, ssl_context=context)
+    #app.run(host='0.0.0.0', port=443, ssl_context=context)
+    serve(app, host='0.0.0.0', port=443, url_scheme='https', ssl_context=context)
